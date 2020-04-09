@@ -147,11 +147,11 @@ void levantaDatos() {
 void generaInicial() {
 
 	// Podria generarse con un algoritmo voraz
-	// Se genera aleatoriamentew
+	// Se genera aleatoriamente
 	
 	Poblacion poblacion = Poblacion();
 	poblacion.inicializaPoblacion();
-	//poblacion.imprimeTodaPoblacion();
+	poblacion.imprimeTodaPoblacion();
 
 }
 
