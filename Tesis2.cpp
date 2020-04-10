@@ -50,14 +50,14 @@ class Poblacion {
 // Tenemos como condiciones que:
 // LargoBarra <= LargoMaterial
 // Suma(LargoBarra * CantidadBarras) <= LargoMaterial * CantidadMaterial
-int cantidadBarrasPedido = 132;
-int tiposBarras = 5;
-float largoBarras[] = { 2,4,5,6,5 };
-int cantidadBarras[] = { 12,32,12,53,23 };
+int cantidadBarrasPedido = 20;
+int tiposBarras = 3;
+float largoBarras[] = { 2,5,6 };
+int cantidadBarras[] = { 5,4,11 };
 // Sumaria = 24+148+60+318+115 = 172+378+115 = 680;
 // 680 / 15 = 45.34;
 int cantidadMateriales = 60;
-float largoMaterial = 15;
+float largoMaterial = 11;
 int sizePoblacion = 100;
 class Barra {
 
@@ -79,19 +79,24 @@ public:
 		std::random_shuffle(cromosoma, cromosoma + cantidadBarrasPedido);
 	}
 	void evalua(vector<Barra> barrasPedido) {
-		float sizeBarrasPedido = barrasPedido.size();
-		int cantMaterialesConsumidos = 0;
+		int sizeBarrasPedido = barrasPedido.size();
+		int cantMaterialesConsumidos = 1;
 		float sumaLargos = 0;
 		for (int i = 0; i < sizeBarrasPedido; i++) {
+			//printf("(((%f)))", barrasPedido.at(i).largo);
+			
 			if (largoMaterial - sumaLargos >= barrasPedido.at(i).largo) {
 				sumaLargos = sumaLargos + barrasPedido.at(i).largo;
 			}
 			else {
 				cantMaterialesConsumidos = cantMaterialesConsumidos + 1;
-				sumaLargos = 0;
+				sumaLargos = barrasPedido.at(i).largo;
 			}
+			//printf("(((%f)))", sumaLargos);
+
 		}
-		puntaje = cantMaterialesConsumidos;
+//		printf("---%d---", cantMaterialesConsumidos);
+		puntaje = cantMaterialesConsumidos * 1.0f;
 	}
 };
 class Poblacion {
@@ -114,7 +119,6 @@ public:
 				Barra actBarra = Barra(largoBarras[i]);
 				barrasPedido.push_back(actBarra);
 			}
-			printf("((%d))", barrasPedido.size());
 		}
 		evaluaSoluciones();
 	}
@@ -130,60 +134,74 @@ public:
 			printf("%f)", soluciones.at(i).puntaje);
 			for (int j = 0;j < cantidadBarrasPedido;j++) {
 				printf("%d-", soluciones.at(i).cromosoma[j]);
+				printf("(%f)-", barrasPedido.at(soluciones.at(i).cromosoma[j]).largo);
 			}
 			printf("\n");
 		}
-		for (int i = 0; i < cantidadBarrasPedido; i++) {
+		/*for (int i = 0; i < cantidadBarrasPedido; i++) {
 			printf("%d-", i);
 			printf("%f-", barrasPedido.at(i).largo);
 
 			printf("\n");
-		}
+		}*/
+	}
+	void generaInicial() {
+
+		// Podria generarse con un algoritmo voraz
+		// Se genera aleatoriamente
+		inicializaPoblacion();
+		imprimeTodaPoblacion();
+
+	}
+	void imprimeMejorSolucion() {
+
 	}
 };
 void levantaDatos() {
 	// Genera las clases a partir de arreglos de datos
 }
-void generaInicial() {
 
-	// Podria generarse con un algoritmo voraz
-	// Se genera aleatoriamente
-	
-	Poblacion poblacion = Poblacion();
-	poblacion.inicializaPoblacion();
-	poblacion.imprimeTodaPoblacion();
+class Evolucion {
+public:
+	Evolucion() {
 
-}
+	}
+	vector<Solucion> seleccion() {
 
+	}
+	vector<Solucion> crossover(vector < Solucion> seleccionados) {
+
+	}
+	void mutacion(vector<Solucion> nuevosHijos) {
+
+	}
+	void agregaHijos(Poblacion poblacion, vector<Solucion> nuevosHijos) {
+
+	}
+	void elitismo(vector<Solucion> nuevosHijos) {
+
+	}
+};
 int main()
 {
 
 	std::cout << "Hello World!\n";
 	srand(time(NULL));
-	generaInicial();
+	Poblacion poblacion = Poblacion();
+	poblacion.generaInicial();
 	/*givePuntaje();
 	//imprimeResult();
 	int cant = 0;
-	while (cant < 100) {
-		setElegidos();
-		combinaElegidos();
-		givePuntaje();
-		//imprimeTop();
-		cant = cant + 1;
-		//printf("_%d_", cant);
+	*/
+	int cantidadGeneraciones = 0;
+	while (cantidadGeneraciones <= poblacion.maximoGeneraciones) {
+		vector<Solucion> seleccionados = evolucion.seleccion();
+		vector<Solucion> nuevosHijos = evolucion.crossover(seleccionados);
+		evolucion.mutacion(nuevosHijos);
+		evolucion.agregarHijos(poblacion, nuevosHijos);
+		evolucion.elistimo(poblacion);
+		cantidadGeneraciones = cantidadGeneraciones + 1;
 	}
-	sort(mapas.begin(), mapas.end(), compara);
+	poblacion.imprimeMejorSolucion();
 
-	imprimeResult();*/
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
