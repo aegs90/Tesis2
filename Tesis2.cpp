@@ -47,6 +47,11 @@ class Poblacion {
 };
 */
 
+#include "Material.h"
+#include "Barra.h"
+#include "Solucion.h"
+#include "Evolucion.h"
+#include "Poblacion.h"
 // Tenemos como condiciones que:
 // LargoBarra <= LargoMaterial
 // Suma(LargoBarra * CantidadBarras) <= LargoMaterial * CantidadMaterial
@@ -59,129 +64,12 @@ int cantidadBarras[] = { 5,4,11 };
 int cantidadMateriales = 60;
 float largoMaterial = 11;
 int sizePoblacion = 100;
-class Barra {
 
-public:
-	float largo;
-	Barra(float largoBarra) {
-		largo = largoBarra;
-	}
-};
-class Solucion {
-public:
-	int* cromosoma;
-	float puntaje;
-	Solucion() {
-		cromosoma = new int[cantidadBarrasPedido];
-		for (int i = 0; i < cantidadBarrasPedido; i++) {
-			cromosoma[i] = i;
-		}
-		std::random_shuffle(cromosoma, cromosoma + cantidadBarrasPedido);
-	}
-	void evalua(vector<Barra> barrasPedido) {
-		int sizeBarrasPedido = barrasPedido.size();
-		int cantMaterialesConsumidos = 1;
-		float sumaLargos = 0;
-		for (int i = 0; i < sizeBarrasPedido; i++) {
-			//printf("(((%f)))", barrasPedido.at(i).largo);
-			
-			if (largoMaterial - sumaLargos >= barrasPedido.at(i).largo) {
-				sumaLargos = sumaLargos + barrasPedido.at(i).largo;
-			}
-			else {
-				cantMaterialesConsumidos = cantMaterialesConsumidos + 1;
-				sumaLargos = barrasPedido.at(i).largo;
-			}
-			//printf("(((%f)))", sumaLargos);
-
-		}
-//		printf("---%d---", cantMaterialesConsumidos);
-		puntaje = cantMaterialesConsumidos * 1.0f;
-	}
-};
-class Poblacion {
-public:
-	vector<Solucion> soluciones;
-	vector<Barra> barrasPedido;
-	Solucion mejorSolucion;
-	int maximoGeneraciones;
-	int actualGeneracion;
-	Poblacion() {
-		
-	}
-	void inicializaPoblacion() {
-		for (int i = 0; i < sizePoblacion; i++) {
-			Solucion actSolucion = Solucion();
-			soluciones.push_back(actSolucion);
-		}
-		for (int i = 0;i < tiposBarras;i++) {
-			for (int j = 0;j < cantidadBarras[i];j++) {
-				Barra actBarra = Barra(largoBarras[i]);
-				barrasPedido.push_back(actBarra);
-			}
-		}
-		evaluaSoluciones();
-	}
-	void evaluaSoluciones() {
-		int cantSoluciones = soluciones.size();
-		for (int i = 0; i < cantSoluciones; i++) {
-			soluciones.at(i).evalua(barrasPedido);
-		}
-	}
-	void imprimeTodaPoblacion() {
-		for (int i = 0; i < sizePoblacion; i++) {
-			printf("%d)", i);
-			printf("%f)", soluciones.at(i).puntaje);
-			for (int j = 0;j < cantidadBarrasPedido;j++) {
-				printf("%d-", soluciones.at(i).cromosoma[j]);
-				printf("(%f)-", barrasPedido.at(soluciones.at(i).cromosoma[j]).largo);
-			}
-			printf("\n");
-		}
-		/*for (int i = 0; i < cantidadBarrasPedido; i++) {
-			printf("%d-", i);
-			printf("%f-", barrasPedido.at(i).largo);
-
-			printf("\n");
-		}*/
-	}
-	void generaInicial() {
-
-		// Podria generarse con un algoritmo voraz
-		// Se genera aleatoriamente
-		inicializaPoblacion();
-		imprimeTodaPoblacion();
-
-	}
-	void imprimeMejorSolucion() {
-
-	}
-};
 void levantaDatos() {
 	// Genera las clases a partir de arreglos de datos
 }
 
-class Evolucion {
-public:
-	Evolucion() {
 
-	}
-	vector<Solucion> seleccion() {
-
-	}
-	vector<Solucion> crossover(vector < Solucion> seleccionados) {
-
-	}
-	void mutacion(vector<Solucion> nuevosHijos) {
-
-	}
-	void agregaHijos(Poblacion poblacion, vector<Solucion> nuevosHijos) {
-
-	}
-	void elitismo(vector<Solucion> nuevosHijos) {
-
-	}
-};
 int main()
 {
 
@@ -189,19 +77,17 @@ int main()
 	srand(time(NULL));
 	Poblacion poblacion = Poblacion();
 	poblacion.generaInicial();
-	/*givePuntaje();
-	//imprimeResult();
-	int cant = 0;
-	*/
+
+	Evolucion evolucion = Evolucion(poblacion);
+
 	int cantidadGeneraciones = 0;
 	while (cantidadGeneraciones <= poblacion.maximoGeneraciones) {
 		vector<Solucion> seleccionados = evolucion.seleccion();
 		vector<Solucion> nuevosHijos = evolucion.crossover(seleccionados);
 		evolucion.mutacion(nuevosHijos);
 		evolucion.agregarHijos(poblacion, nuevosHijos);
-		evolucion.elistimo(poblacion);
+		evolucion.elitismo();
 		cantidadGeneraciones = cantidadGeneraciones + 1;
 	}
 	poblacion.imprimeMejorSolucion();
-
 }

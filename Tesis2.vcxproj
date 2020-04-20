@@ -151,7 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Barra.cpp" />
+    <ClCompile Include="Evolucion.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Poblacion.cpp" />
+    <ClCompile Include="Solucion.cpp" />
     <ClCompile Include="Tesis2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Barra.h" />
+    <ClInclude Include="Evolucion.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Poblacion.h" />
+    <ClInclude Include="Solucion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

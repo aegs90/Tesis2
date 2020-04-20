@@ -18,5 +18,37 @@
     <ClCompile Include="Tesis2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Evolucion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Barra.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Solucion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Poblacion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Evolucion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Barra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Solucion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Poblacion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
