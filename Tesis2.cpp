@@ -6,46 +6,6 @@
 #include <algorithm>
 #include <time.h>
 using namespace std;
-/*
-class TipoBarra {
-	int id;
-	float largoBarra;
-};
-
-class Material {
-	Barra *tiposdeBarrasDisponibles;
-	int *cantidadPorTipoDeBarra;
-};
-
-class Producto {
-	int id;
-	float largo;
-};
-
-class LineaPedido {
-	int idLinea;
-	Producto productoPedido;
-	int cantidad;
-};
-
-class Pedido {
-	int idPedido;
-	Material materialDisponible;
-	LineaPedido* lineasDePedido;
-};
-
-class Cromosoma {
-	int idCromosoma;
-	int idPedido;
-	int* idProductoProducido;
-};
-
-class Poblacion {
-	int idMejorSolucion;
-	int cantidadGeneraciones;
-	Cromosoma* cromosomas;
-};
-*/
 
 #include "Material.h"
 #include "Barra.h"
@@ -74,20 +34,24 @@ int main()
 {
 
 	std::cout << "Hello World!\n";
-	srand(time(NULL));
+	srand(time(0));
 	Poblacion poblacion = Poblacion();
+	poblacion.levantaDatos();
 	poblacion.generaInicial();
-
+	
 	Evolucion evolucion = Evolucion(poblacion);
 
 	int cantidadGeneraciones = 0;
 	while (cantidadGeneraciones <= poblacion.maximoGeneraciones) {
+		printf("------------\nGeneracion %d\n", cantidadGeneraciones);
 		vector<Solucion> seleccionados = evolucion.seleccion();
 		vector<Solucion> nuevosHijos = evolucion.crossover(seleccionados);
 		evolucion.mutacion(nuevosHijos);
 		evolucion.agregarHijos(poblacion, nuevosHijos);
-		evolucion.elitismo();
+		evolucion.elitismo(poblacion);
 		cantidadGeneraciones = cantidadGeneraciones + 1;
+		evolucion.poblacion.imprimeTodaPoblacion();
+		evolucion.poblacion.imprimeMejorSolucion();
 	}
-	poblacion.imprimeMejorSolucion();
+	evolucion.poblacion.imprimeMejorSolucion();
 }

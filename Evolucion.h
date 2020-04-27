@@ -12,5 +12,5 @@ public:
 	vector<Solucion> crossover(vector < Solucion> seleccionados);
 	void mutacion(vector<Solucion> nuevosHijos);
 	void agregarHijos(Poblacion poblacion, vector<Solucion> nuevosHijos);
-	void elitismo();
+	void elitismo(Poblacion);
 };

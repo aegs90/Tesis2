@@ -22,6 +22,7 @@ public:
 	void inicializaPoblacion();
 	void evaluaSoluciones();
 	void imprimeTodaPoblacion();
+	void levantaDatos();
 	void generaInicial();
 	void imprimeMejorSolucion();
 };
