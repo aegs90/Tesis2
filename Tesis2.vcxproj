@@ -153,16 +153,22 @@
   <ItemGroup>
     <ClCompile Include="Barra.cpp" />
     <ClCompile Include="Evolucion.cpp" />
+    <ClCompile Include="EvolucionG.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Memetico.cpp" />
     <ClCompile Include="Poblacion.cpp" />
+    <ClCompile Include="PoblacionG.cpp" />
     <ClCompile Include="Solucion.cpp" />
     <ClCompile Include="Tesis2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Barra.h" />
     <ClInclude Include="Evolucion.h" />
+    <ClInclude Include="EvolucionG.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Memetico.h" />
     <ClInclude Include="Poblacion.h" />
+    <ClInclude Include="PoblacionG.h" />
     <ClInclude Include="Solucion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

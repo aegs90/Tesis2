@@ -25,33 +25,34 @@ int cantidadMateriales = 60;
 float largoMaterial = 11;
 int sizePoblacion = 100;
 
-void levantaDatos() {
-	// Genera las clases a partir de arreglos de datos
-}
+#include "PoblacionG.h"
+int main() {
 
-
-int main()
-{
-
-	std::cout << "Hello World!\n";
 	srand(time(0));
-	Poblacion poblacion = Poblacion();
-	poblacion.levantaDatos();
-	poblacion.generaInicial();
-	
-	Evolucion evolucion = Evolucion(poblacion);
+	int cantidadGeneraciones = 1000;
+	int tamPoblacion = 1000;
+	Poblacion* poblacion = new Poblacion(cantidadGeneraciones,tamPoblacion);
+	poblacion->levantaDatos();
 
-	int cantidadGeneraciones = 0;
-	while (cantidadGeneraciones <= poblacion.maximoGeneraciones) {
+	Evolucion* evolucion = new Evolucion(poblacion);
+
+	cantidadGeneraciones = 0;
+	while (cantidadGeneraciones <= poblacion->cantidadGeneraciones) {
 		printf("------------\nGeneracion %d\n", cantidadGeneraciones);
-		vector<Solucion> seleccionados = evolucion.seleccion();
-		vector<Solucion> nuevosHijos = evolucion.crossover(seleccionados);
-		evolucion.mutacion(nuevosHijos);
-		evolucion.agregarHijos(poblacion, nuevosHijos);
-		evolucion.elitismo(poblacion);
+		vector<Solucion*> seleccionados = evolucion->seleccion();
+		vector<Solucion*> nuevosHijos = evolucion->crossover(seleccionados);
+		evolucion->mutacion(nuevosHijos);
+		evolucion->agregaHijos(nuevosHijos);
+		poblacion->evaluaSoluciones();
+
+		evolucion->elitismo();
 		cantidadGeneraciones = cantidadGeneraciones + 1;
-		evolucion.poblacion.imprimeTodaPoblacion();
-		evolucion.poblacion.imprimeMejorSolucion();
+		//evolucion->imprimeTodaPoblacion();
+
+
+		printf("Puntaje90: %f\n",evolucion->poblacion->soluciones.at(99)->puntaje);
+		evolucion->poblacion->imprimeMejorSolucion(1);
 	}
-	evolucion.poblacion.imprimeMejorSolucion();
+	evolucion->poblacion->imprimeMejorSolucion(1);
+	return EXIT_SUCCESS;
 }

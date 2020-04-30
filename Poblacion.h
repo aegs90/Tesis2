@@ -11,18 +11,20 @@ extern int sizePoblacion;
 extern int tiposBarras;
 class Poblacion {
 public:
-	vector<Solucion> soluciones;
-	vector<Barra> barrasPedido;
-	vector<Material> barrasMaterial;
+	int cantidadGeneraciones;
+	int tamPoblacionInicial;
+	int cantidadCromosomas;
+	vector<Solucion*> soluciones;
+	vector<Barra*> barrasPedido;
+	vector<Material*> barrasMaterial;
 	Solucion mejorSolucion;
 	int maximoGeneraciones;
 	int actualGeneracion;
 	float sumDesperdicios;
 	Poblacion();
-	void inicializaPoblacion();
+	Poblacion(int,int);
 	void evaluaSoluciones();
 	void imprimeTodaPoblacion();
 	void levantaDatos();
-	void generaInicial();
-	void imprimeMejorSolucion();
+	void imprimeMejorSolucion(int);
 };
