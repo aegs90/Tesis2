@@ -25,6 +25,6 @@ public:
 	Poblacion(int,int);
 	void evaluaSoluciones();
 	void imprimeTodaPoblacion();
-	void levantaDatos();
+	void levantaDatos(int);
 	void imprimeMejorSolucion(int);
 };

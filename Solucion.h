@@ -13,5 +13,7 @@ public:
 	Solucion(int);
 	Solucion(Solucion* s1, Solucion* s2, int index);
 	void fixCromosoma();
+	void getBloques(vector<tuple<int*, int, float, float>>&);
+	void localSearch(vector<Material*>, vector<Barra*>);
 	void evalua(vector<Barra*> barrasPedido, vector<Material*> barrasMaterial);
 };

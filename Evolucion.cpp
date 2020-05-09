@@ -39,14 +39,14 @@ vector<Solucion*> Evolucion::seleccion() {
 	printf("Seleccion) Cantidad de seleccionados: %d\n", seleccionados.size());
 	printf("Seleccion) Cantidad de soluciones en la poblacion: %d\n", poblacion->soluciones.size());
 	//imprime(seleccionados);
+	delete[] probabilidades;
 	return seleccionados;
 }
 
-vector<Solucion*> Evolucion::crossover(vector < Solucion*> seleccionados) {
+vector<Solucion*> Evolucion::crossover(vector < Solucion*> &seleccionados) {
 	vector<Solucion*> nuevosHijos;
 	int cantidadCrossover = seleccionados.size();
 
-	
 	for (int i = 0; i < cantidadCrossover; i++) {
 		int randCromosoma = rand() % this->poblacion->cantidadCromosomas;
 		int randCrossover = rand() % cantidadCrossover;
@@ -59,14 +59,19 @@ vector<Solucion*> Evolucion::crossover(vector < Solucion*> seleccionados) {
 	printf("Crossover) Nuevos hijos: %d\n", nuevosHijos.size());
 	return nuevosHijos;
 }
-void Evolucion::mutacion(vector<Solucion*> nuevosHijos) {
-
+void Evolucion::busquedaLocal(vector<Solucion*> &nuevosHijos) {
+	int cantHijos = nuevosHijos.size();
+	for (int i = 0; i < cantHijos; i++) {
+		nuevosHijos.at(i)->localSearch(poblacion->barrasMaterial,poblacion->barrasPedido);
+	}
+}
+void Evolucion::mutacion(vector<Solucion*>& nuevosHijos) {
 	int sizeNuevosHijos = nuevosHijos.size();
 	int cantMutaciones = 0;
 	for (int k = 0; k < sizeNuevosHijos; k++) {
 		for (int i = 0; i < this->poblacion->cantidadCromosomas; i++) {
 			int r = rand() % 20;
-			
+
 			if (r == 1) {
 				cantMutaciones = cantMutaciones + 1;
 				int r2 = rand() % this->poblacion->cantidadCromosomas;
@@ -77,8 +82,9 @@ void Evolucion::mutacion(vector<Solucion*> nuevosHijos) {
 		}
 	}
 	printf("Mutacion) Cantidad de Genes Mutados: %d\n", cantMutaciones);
+
 }
-void Evolucion::agregaHijos(vector<Solucion*> nuevosHijos) {
+void Evolucion::agregaHijos(vector<Solucion*> &nuevosHijos) {
 	printf("AgregaHijos) CantSoluciones: %d\nAgregaHijos) CantNuevosHijos: %d\n", poblacion->soluciones.size(), nuevosHijos.size());
 	int cantNuevosHijos = nuevosHijos.size();
 	for (int i = 0; i < cantNuevosHijos; i++) {
@@ -94,6 +100,7 @@ bool funcCompara(Solucion* a, Solucion* b) {
 void Evolucion::elitismo() {
 	sort(poblacion->soluciones.begin(), poblacion->soluciones.end(), funcCompara);
 	poblacion->soluciones.erase(poblacion->soluciones.end() - 40, poblacion->soluciones.end());
+
 }
 void Evolucion::imprimeTodaPoblacion() {
 	poblacion->imprimeTodaPoblacion();

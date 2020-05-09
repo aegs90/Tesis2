@@ -36,12 +36,6 @@
     <ClCompile Include="Memetico.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PoblacionG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvolucionG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Evolucion.h">
@@ -60,12 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Memetico.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PoblacionG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EvolucionG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,9 +9,10 @@ public:
 	Poblacion* poblacion;
 	Evolucion(Poblacion* poblacion);
 	vector<Solucion*> seleccion();
-	vector<Solucion*> crossover(vector < Solucion*>);
-	void mutacion(vector<Solucion*>);
-	void agregaHijos(vector<Solucion*>);
+	vector<Solucion*> crossover(vector < Solucion*>&);
+	void mutacion(vector<Solucion*>&);
+	void agregaHijos(vector<Solucion*>&);
 	void elitismo();
+	void busquedaLocal(vector<Solucion*>&);
 	void imprimeTodaPoblacion();
 };
